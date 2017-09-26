@@ -1,0 +1,22 @@
+{
+  "name": "sortechs/sdk",
+  "description": "Api to call sortechs website.",
+  "keywords": ["automation", "facebook", "twitter","Instagram","sortechs"],
+  "license": "Sortechs",
+  "authors": [
+    {
+      "name": "Mohammad Salahat",
+      "email": "msalahat88@gmail.com"
+    }
+  ],
+  "minimum-stability": "stable",
+  "autoload": {
+    "psr-4": {
+      "sortechs\\sdk\\src\\": "src/"
+    }
+  },
+  "require": {
+    "php": "*"
+
+  }
+}
