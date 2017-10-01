@@ -1,4 +1,4 @@
-# sortechs sdk v0.1
+# sortechs sdk-php v0.1
 
 ## Add News ##
 
