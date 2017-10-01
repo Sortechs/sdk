@@ -1,4 +1,4 @@
-# Sortechs sdk-php v0.1
+# Sortechs SDK for PHP (v0.1)
 
 ## Add News ##
 
