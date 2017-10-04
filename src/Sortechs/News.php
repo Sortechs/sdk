@@ -12,13 +12,17 @@ class News{
 
     private $sectionId='';
 
-    private $sectionName;
+    private $sectionName = '';
 
-    private $title;
+    private $title ='';
 
-    private $article;
+    private $article ='';
 
-    private $url;
+    private $url ='';
+
+    private $newsId = '';
+
+    private $options = [];
 
     /**
      * @param mixed $url
@@ -104,13 +108,48 @@ class News{
         $this->article = $article;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getNewsId()
+    {
+        return $this->newsId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOptions()
+    {
+        return $this->options;
+    }
+
+    /**
+     * @param mixed $news_id
+     */
+    public function setNewsId($news_id)
+    {
+        $this->newsId = $news_id;
+    }
+
+    /**
+     * @param mixed $options
+     */
+    public function setOptions($options)
+    {
+        $this->options = $options;
+    }
+
     public function getData(){
         return[
-            'sectionId'=>$this->getSectionId(),
-            'sectionName'=>$this->getSectionName(),
-            'title'=>$this->getTitle(),
-            'article'=>$this->getArticle(),
-            'url'=>$this->getUrl(),
+
+            'sectionId'   => $this->getSectionId(),
+            'sectionName' => $this->getSectionName(),
+            'title'       => $this->getTitle(),
+            'article'     => $this->getArticle(),
+            'url'         => $this->getUrl(),
+            'news_id'     => $this->getNewsId(),
+            'options'     => $this->getOptions()
         ];
     }
 

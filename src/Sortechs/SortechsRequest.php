@@ -49,7 +49,7 @@ class SortechsRequest
      */
     protected $files = [];
 
-    private $url = 'https://staging.sortechs.com/api';
+    private $url = 'https://social.sortechs.com/api';
 
     const DEFAULT_REQUEST_TIMEOUT = 60;
 
@@ -107,6 +107,7 @@ class SortechsRequest
         curl_setopt($curl, CURLOPT_TIMEOUT, $timeout);
         curl_setopt($curl,CURLOPT_POST, count($curl_post_data));
         curl_setopt($curl,CURLOPT_POSTFIELDS, $curl_post_data);
+
         $curl_response = curl_exec($curl);
         if ($curl_response === false) {
             $info = curl_getinfo($curl);

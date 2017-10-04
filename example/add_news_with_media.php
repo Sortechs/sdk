@@ -41,11 +41,13 @@ $media = $so->app->media([
     ]
 ]);
 $news = $so->app->news([
-    'sectionId'=>'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx', //id from your api
-    'sectionName'=>'News',
-    'title'=>'XXXX XXXX ',
-    'article'=>'XXX XXX - XXX',
-    'url'=>'https://www.XXXX.com/news.html?id=XXXXXXXX',
+    'sectionId'=>'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx', //id from your api *Required or sectionName
+    'sectionName'=>'News',//*Required or sectionId
+    'title'=>'XXXX XXXX ',//*Required
+    'article'=>'XXX XXX - XXX',//*Required
+    'url'=>'https://www.XXXX.com/news.html?id=XXXXXXXX',//*Required
+    'newsId'=>'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX', /*id from your DATABASE , Like 1000  *Required */
+    'options'=>[] /* Optional*/
 ]);
 $response = $so->AddNewsWithMedia($token,$news,$media);
 print_r($response->getNews());
@@ -60,11 +62,13 @@ $data = [
 $so = new \Sortechs\Sortechs($data);
 $section = $so->getSections($token);
 $news = $so->app->news([
-    'sectionId'=>'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx', //id from your api
-    'sectionName'=>'News',
-    'title'=>'XXXX XXXX ',
-    'article'=>'XXX XXX - XXX',
-    'url'=>'https://www.XXXX.com/news.html?id=XXXXXXXX',
+    'sectionId'=>'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx', //id from your api *Required or sectionName
+    'sectionName'=>'News',//*Required or sectionId
+    'title'=>'XXXX XXXX ',//*Required
+    'article'=>'XXX XXX - XXX',//*Required
+    'url'=>'https://www.XXXX.com/news.html?id=XXXXXXXX',//*Required
+    'newsId'=>'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX', /*id from your DATABASE , Like 1000  *Required */
+    'options'=>[] /* Optional*/
 ]);
 
 $response = $so->AddNewsWithMedia($so->accessToken,$news,$media);

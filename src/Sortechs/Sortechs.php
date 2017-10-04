@@ -21,7 +21,7 @@ use Sortechs\response\ResponseNewsMedia;
 use Sortechs\response\ResponseSections;
 use Sortechs\response\ResponseTags;
 
-define('SORTECHS_STATUS', 1);
+define('SORTECHS_STATUS', 0);
 
 class Sortechs extends Request
 {

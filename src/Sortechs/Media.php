@@ -7,6 +7,8 @@
  */
 namespace Sortechs;
 
+use Sortechs\Exceptions\SortechsExceptions;
+
 class Media{
 
     private $url;
@@ -84,13 +86,16 @@ class Media{
                 $header = get_headers($image,1);
                 if(is_array($header)){
                     if(isset($header['Content-Type']) and (in_array($header['Content-Type'],$content_type))){
-                        $this->setType(explode('/',$header['Content-Type'])[0]);
-                        return true;
+                        $ex = explode('/',$header['Content-Type']);
+                        if(isset($ex[0]) and strtolower($ex[0])==strtolower($this->type)){
+                            $this->setType(explode('/',$header['Content-Type'])[0]);
+                            return true;
+                        }
                     }
                 }
             }
         }
-        return false;
+        return  new SortechsExceptions('Please check type media not compatible with source .',500);
     }
 
     public function getData(){

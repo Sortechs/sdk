@@ -133,8 +133,13 @@ class SortechsApp{
                         throw new SortechsExceptions('this "'.$index.'" key not property in media class');
                     }
                 }
-                if($media->valid())
+                try{
+                    $media->valid();
                     $media_array[]=$media;
+                }catch (SortechsExceptions $e){
+                    echo $e->getMessage();
+                    exit();
+                }
             }
         }
 
