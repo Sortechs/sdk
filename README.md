@@ -1,5 +1,15 @@
 # Sortechs SDK for PHP (v0.1)
 
+This repository contains the open source PHP SDK that allows you to access the Sortechs automation app from your PHP app.
+
+## Installation
+
+The Sortechs PHP SDK can be installed with [Composer](https://getcomposer.org/). Run this command:
+
+```sh
+composer require sortechs/sdk
+```
+
 ## Add News ##
 
 ```go 
@@ -122,3 +132,5 @@ $tags = $so->app->tags([
 ]);
 $response = $so->AddTags($token,$tags);
 ```
+Complete examples are available [here](example/).
+
