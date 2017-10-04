@@ -40,7 +40,7 @@ $response = $so->AddNews($token,$news);
 print_r($response);
 ```
 
-## Add News With media ##
+## Add news with media ##
 
 ```go
 require_once '../src/Sortechs/autoload.php';
@@ -96,7 +96,7 @@ $response = $so->AddNewsWithMedia($token,$news,$media);
 
 ```
 
-## Add Section ## 
+## Add section ## 
 
 ```go
 $data = [
@@ -111,7 +111,7 @@ $data = $so->addSection($token,$data_section);
 ```
 
 
-## add Tags ##
+## Add tags ##
 
 ```go
 require_once '../src/Sortechs/autoload.php';
