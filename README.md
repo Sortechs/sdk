@@ -10,6 +10,8 @@ The Sortechs PHP SDK can be installed with [Composer](https://getcomposer.org/).
 composer require sortechs/sdk
 ```
 
+# Examples
+
 ## Add News ##
 
 ```go 
