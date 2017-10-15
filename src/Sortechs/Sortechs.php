@@ -187,6 +187,29 @@ class Sortechs extends Request
         return new  ResponseGetNews($obj);
     }
 
+    public function SendNewsWithMedia(AccessToken $token, UpdateNews $news, $media)
+    {
+        /**@var Media $item */
+        $data_media = [];
+        foreach ($media as $item) {
+            $data_media[] = $item->getData();
+        }
+        $obj = new Response(
+            $this->app->post(
+                '/updateNewsWithMedia',
+                [
+                    'id' => $this->app->getId(),
+                    'secret' => $this->app->getSecret(),
+                    'accessToken' => $token->getValue(),
+                    'news' => json_encode($news->getData()),
+                    'media' => json_encode($data_media)
+                ],
+                $token
+            )
+        );
+        return new  ResponseNewsMedia($obj);
+    }
+
     public function AddTags(AccessToken $token, $tags)
     {
         $data_tags = [];
