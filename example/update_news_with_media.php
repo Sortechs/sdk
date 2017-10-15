@@ -17,7 +17,6 @@ $section = $so->getClients($token);
 $news_id = ''; // from your db
 $section_id = ''; //from sortechs you can search use getSections or getClients method and get id
 $news = $so->getNews($news_id,$section_id,$token);
-
 if(!empty($news->getId())){
     $update = $so->app->updateNews([
         'id'=>$news->getNewsId(),
@@ -28,6 +27,14 @@ if(!empty($news->getId())){
         'url'=>'https://www.XXXX.com/news.html?id=XXXXXXXX',//*Required
         'options'=>[] /* Optional*/
     ]);
-    $response = $so->SendNews($token,$update);
+    $media = $so->app->media([
+        [
+            'url'=>'https://www.XXXXXXXXXXXXXXXXXX.com/css/trolltunga.jpg',
+            'caption'=>null,
+            'type'=>'image'
+        ]
+    ]);
+
+    $response = $so->SendNewsWithMedia($token,$update,$media);
     print_r($response);
 }
