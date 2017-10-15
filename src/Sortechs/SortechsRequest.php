@@ -120,7 +120,7 @@ class SortechsRequest
             throw new SortechsExceptions('error occured: ' . $decoded->response->errormessage);
         }
 
-        return $decoded;
+        return !empty($decoded)?$decoded:$curl_response;
     }
 
     private function getToken(){

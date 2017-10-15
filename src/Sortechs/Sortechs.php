@@ -16,6 +16,7 @@ use Sortechs\response\Response;
 use Sortechs\response\ResponseAddSections;
 use Sortechs\response\ResponseClient;
 use Sortechs\response\ResponseGenerateAccessToken;
+use Sortechs\response\ResponseGetNews;
 use Sortechs\response\ResponseNews;
 use Sortechs\response\ResponseNewsMedia;
 use Sortechs\response\ResponseSections;
@@ -152,7 +153,8 @@ class Sortechs extends Request
         return $client;
     }
 
-    public function AddNews(AccessToken $token, News $news){
+    public function AddNews(AccessToken $token, News $news)
+    {
         $obj = new Response(
             $this->app->post(
                 '/addNews',
@@ -168,9 +170,27 @@ class Sortechs extends Request
         return new  ResponseNews($obj);
     }
 
-    public function AddTags(AccessToken $token,$tags){
-        $data_tags=[];
-        /**@var $tag Tags*/
+    public function SendNews(AccessToken $token, UpdateNews $news){
+        
+        $obj = new Response(
+            $this->app->post(
+                '/updateNews',
+                [
+                    'id' => $this->app->getId(),
+                    'secret' => $this->app->getSecret(),
+                    'accessToken' => $token->getValue(),
+                    'news' => json_encode($news->getData())
+                ],
+                $token
+            )
+        );
+        return new  ResponseGetNews($obj);
+    }
+
+    public function AddTags(AccessToken $token, $tags)
+    {
+        $data_tags = [];
+        /**@var $tag Tags */
         foreach ($tags as $tag) {
             $data_tags[] = $tag->getData();
         }
@@ -189,11 +209,12 @@ class Sortechs extends Request
         return new  ResponseTags($obj);
     }
 
-    public function AddNewsWithMedia(AccessToken $token, News $news,$media){
-        /**@var Media $item*/
+    public function AddNewsWithMedia(AccessToken $token, News $news, $media)
+    {
+        /**@var Media $item */
         $data_media = [];
         foreach ($media as $item) {
-            $data_media[]=$item->getData();
+            $data_media[] = $item->getData();
         }
         $obj = new Response(
             $this->app->post(
@@ -203,11 +224,33 @@ class Sortechs extends Request
                     'secret' => $this->app->getSecret(),
                     'accessToken' => $token->getValue(),
                     'news' => json_encode($news->getData()),
-                    'media'=>json_encode($data_media)
+                    'media' => json_encode($data_media)
                 ],
                 $token
             )
         );
         return new  ResponseNewsMedia($obj);
+    }
+
+
+    public function getNews($id, $section_id, AccessToken $token)
+    {
+        if (!empty($id) and !empty($section_id)) {
+            return
+                new  ResponseGetNews(
+                    new Response($this->app->post(
+                        '/get_news',
+                        [
+                            'id' => $this->app->getId(),
+                            'secret' => $this->app->getSecret(),
+                            'accessToken' => $token->getValue(),
+                            'news_id' => $id,
+                            'section_id' => $section_id
+                        ],
+                        $token
+                    )));
+        } else {
+            throw new SortechsExceptions('Please check news id or section id empty');
+        }
     }
 }

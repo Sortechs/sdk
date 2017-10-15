@@ -87,6 +87,8 @@ class SortechsApp{
         return $ipaddress;
     }
 
+   
+
 
     /**@param $data
      * @return News
@@ -94,6 +96,24 @@ class SortechsApp{
      */
     public function news(array $data=[]){
         $news = new News();
+        foreach ($data as $index=>$item) {
+            if(property_exists($news,$index)){
+                $function = 'set'.ucfirst($index);
+                $news->$function($item);
+            }else{
+                throw new SortechsExceptions('this "'.$index.'" key not property in news class');
+            }
+        }
+
+        return $news;
+    }
+
+    /**@param $data
+     * @return UpdateNews
+     * @throws
+     */
+    public function updateNews(array $data=[]){
+        $news = new UpdateNews();
         foreach ($data as $index=>$item) {
             if(property_exists($news,$index)){
                 $function = 'set'.ucfirst($index);

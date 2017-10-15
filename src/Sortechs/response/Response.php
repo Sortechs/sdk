@@ -17,8 +17,13 @@ class Response{
 
     public function __construct($response){
 
-        if($response->statusCode==200){
+        if(!isset($response->statusCode)){
+            echo 'Not found response'.PHP_EOL;
+            print_r($response);
+            die;
+        }
 
+        if($response->statusCode==200){
             try{
                 $this->setResponse($response->response);
                 $this->setStatusCode($response->statusCode);
@@ -30,7 +35,6 @@ class Response{
             }
         }else{
             $this->setStatusCode($response->statusCode);
-
             if(isset($response->textCode))
                 $this->setResponse(new SortechsExceptions($response->textCode,$response->statusCode));
             else{
