@@ -1,5 +1,17 @@
 # Sortechs SDK for PHP (v0.1)
 
+This repository contains the open source PHP SDK that allows you to access the Sortechs automation app from your PHP app.
+
+## Installation
+
+The Sortechs PHP SDK can be installed with [Composer](https://getcomposer.org/). Run this command:
+
+```sh
+composer require sortechs/sdk
+```
+
+# Examples
+
 ## Add News ##
 
 ```go 
@@ -15,18 +27,20 @@ $token = new Sortechs\Authentication\AccessToken($so->generateAccessToken());
 $section = $so->getSections($token);
 
 $news = $so->app->news([
-    'sectionId'=>'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx', //id from your api
-    'sectionName'=>'News',
-    'title'=>'XXXX XXXX ',
-    'article'=>'XXX XXX - XXX',
-    'url'=>'https://www.XXXX.com/news.html?id=XXXXXXXX',
+     'sectionId'=>'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx', //id from your api *Required or sectionName
+    'sectionName'=>'News',//*Required or sectionId
+    'title'=>'XXXX XXXX ',//*Required
+    'article'=>'XXX XXX - XXX',//*Required
+    'url'=>'https://www.XXXX.com/news.html?id=XXXXXXXX',//*Required
+    'newsId'=>'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX', /*id from your DATABASE , Like 1000  *Required */
+    'options'=>[] /* Optional*/
 ]);
 
 $response = $so->AddNews($token,$news);
 print_r($response);
 ```
 
-## Add News With media ##
+## Add news with media ##
 
 ```go
 require_once '../src/Sortechs/autoload.php';
@@ -70,17 +84,19 @@ $media = $so->app->media([
     ]
 ]);
 $news = $so->app->news([
-    'sectionId'=>'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx', //id from your api
-    'sectionName'=>'News',
-    'title'=>'XXXX XXXX ',
-    'article'=>'XXX XXX - XXX',
-    'url'=>'https://www.XXXX.com/news.html?id=XXXXXXXX',
+     'sectionId'=>'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx', //id from your api *Required or sectionName
+    'sectionName'=>'News',//*Required or sectionId
+    'title'=>'XXXX XXXX ',//*Required
+    'article'=>'XXX XXX - XXX',//*Required
+    'url'=>'https://www.XXXX.com/news.html?id=XXXXXXXX',//*Required
+    'newsId'=>'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX', /*id from your DATABASE , Like 1000  *Required */
+    'options'=>[] /* Optional*/
 ]);
 $response = $so->AddNewsWithMedia($token,$news,$media);
 
 ```
 
-## Add Section ## 
+## Add section ## 
 
 ```go
 $data = [
@@ -95,7 +111,7 @@ $data = $so->addSection($token,$data_section);
 ```
 
 
-## add Tags ##
+## Add tags ##
 
 ```go
 require_once '../src/Sortechs/autoload.php';
@@ -118,3 +134,5 @@ $tags = $so->app->tags([
 ]);
 $response = $so->AddTags($token,$tags);
 ```
+Complete examples are available [here](example/).
+
