@@ -11,6 +11,8 @@ use Sortechs\Exceptions\SortechsExceptions;
 class Response{
     private $StatusCode;
 
+    private $textCode;
+
     private $response;
 
     private $customer;
@@ -38,13 +40,30 @@ class Response{
             if(isset($response->textCode))
                 $this->setResponse(new SortechsExceptions($response->textCode,$response->statusCode));
             else{
-                $this->setCustomer($response->response->customer);
+                if(isset($response->response->customer))
+                    $this->setCustomer($response->response->customer);
                 $this->setResponse($response->response);
             }
 
             return $this;
         }
 
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTextCode()
+    {
+        return $this->textCode;
+    }
+
+    /**
+     * @param mixed $TextCode
+     */
+    public function setTextCode($TextCode)
+    {
+        $this->textCode = $TextCode;
     }
 
     /**

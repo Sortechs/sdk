@@ -21,7 +21,7 @@ class ResponseClient{
         if(isset($this->getResponse()->getResponse()->clients)){
             $this->setClients($this->getResponse()->getResponse()->clients);
         }else{
-            $this->setResponse(new SortechsExceptions($this->getResponse()->getResponse()->textCode,$this->getResponse()->getResponse()->statusCode));
+            $this->setResponse(new SortechsExceptions($response->getTextCode(),$response->getStatusCode()));
         }
     }
 

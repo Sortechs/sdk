@@ -19,7 +19,7 @@ class ResponseNewsMedia{
         if(isset($this->getResponse()->getResponse()->news)){
             $this->setNews($this->getResponse()->getResponse()->news);
         }else{
-            $this->setResponse(new SortechsExceptions($this->getResponse()->getResponse()->textCode,$this->getResponse()->getResponse()->statusCode));
+            $this->setResponse(new SortechsExceptions($response->getTextCode(),$response->getStatusCode()));
         }
     }
 

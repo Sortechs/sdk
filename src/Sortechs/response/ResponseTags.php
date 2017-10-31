@@ -19,7 +19,7 @@ class ResponseTags{
         if(isset($this->getResponse()->getResponse()->tags)){
             $this->setTags($this->getResponse()->getResponse()->tags);
         }else{
-            $this->setResponse(new SortechsExceptions($this->getResponse()->getResponse()->textCode,$this->getResponse()->getResponse()->statusCode));
+            $this->setResponse(new SortechsExceptions($response->getTextCode(),$response->getStatusCode()));
         }
     }
 

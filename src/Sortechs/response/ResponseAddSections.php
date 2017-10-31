@@ -26,7 +26,7 @@ class ResponseAddSections{
         if(isset($this->getResponse()->getResponse()->sections)){
             $this->setSections($this->getResponse()->getResponse()->sections);
         }else{
-            $this->setResponse(new SortechsExceptions($this->getResponse()->getResponse()->textCode,$this->getResponse()->getResponse()->statusCode));
+            $this->setResponse(new SortechsExceptions($response->getTextCode(),$response->getStatusCode()));
         }
 
         if(isset($this->getResponse()->getResponse()->section->created)){
@@ -39,7 +39,7 @@ class ResponseAddSections{
                 foreach ($errors as $index=>$error) {
                     $message.='{ '.$index.' } :'.$error.PHP_EOL;
                 }
-                $this->setResponse(new SortechsExceptions($message,$this->getResponse()->getResponse()->statusCode));
+                $this->setResponse(new SortechsExceptions($response->getTextCode(),$response->getStatusCode()));
             }
         }elseif (isset($this->getResponse()->getResponse()->section->updated)){
             if($this->getResponse()->getResponse()->section->updated){
@@ -54,7 +54,7 @@ class ResponseAddSections{
                 $this->setResponse(new SortechsExceptions($message,$this->getResponse()->getResponse()->statusCode));
             }
         }else{
-            $this->setResponse(new SortechsExceptions($this->getResponse()->getResponse()->textCode,$this->getResponse()->getResponse()->statusCode));
+            $this->setResponse(new SortechsExceptions($response->getTextCode(),$response->getStatusCode()));
         }
     }
 

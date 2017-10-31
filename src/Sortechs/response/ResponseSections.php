@@ -21,7 +21,7 @@ class ResponseSections{
         if(isset($this->getResponse()->getResponse()->sections)){
             $this->setSections($this->getResponse()->getResponse()->sections);
         }else{
-            $this->setResponse(new SortechsExceptions($this->getResponse()->getResponse()->textCode,$this->getResponse()->getResponse()->statusCode));
+            $this->setResponse(new SortechsExceptions($response->getTextCode(),$response->getStatusCode()));
         }
     }
 
