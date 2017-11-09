@@ -19,6 +19,8 @@ class Media{
 
     private $caption;
 
+    private $length;
+
     /**
      * @return mixed
      */
@@ -34,6 +36,23 @@ class Media{
     {
         return $this->type;
     }
+
+     /**
+     * @return mixed
+     */
+    public function getLength()
+    {
+        return $this->length;
+    }
+
+    /**
+     * @param mixed $length
+     */
+    public function setLength($length)
+    {
+        $this->length = $length;
+    }
+
 
     /**
      * @return mixed
@@ -109,6 +128,7 @@ class Media{
                         if(isset($ex[0]) and strtolower($ex[0])==strtolower($this->type)){
                             $this->setType(explode('/',$header['Content-Type'])[0]);
                             $this->setFullType($ex);
+                            $this->setLength(isset($header['Content-Length'])?$header['Content-Length']:0);
                             return true;
                         }
                     }
@@ -123,7 +143,8 @@ class Media{
             'url'=>$this->getUrl(),
             'type'=>$this->getType(),
             'caption'=>$this->getCaption(),
-            'full_type'=>$this->getFullType()
+            'full_type'=>$this->getFullType(),
+            'length'=>$this->getLength()
         ];
     }
 }
