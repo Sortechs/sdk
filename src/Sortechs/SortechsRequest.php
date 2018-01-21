@@ -49,7 +49,7 @@ class SortechsRequest
      */
     protected $files = [];
 
-    private $url = 'https://local.sortechs.com/v1/api';
+    private $url = 'https://social.sortechs.com/v1/api';
 
     const DEFAULT_REQUEST_TIMEOUT = 60;
 
