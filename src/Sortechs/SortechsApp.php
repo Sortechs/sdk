@@ -178,7 +178,7 @@ class SortechsApp{
 
 
     /**@param $data array
-     * @return Tags
+     * @return array
      * @throws
      */
     public function tags(array $data = []){
@@ -200,7 +200,11 @@ class SortechsApp{
             $tags[] = $tag;
         }
 
-        return $tags;
+        return [
+            'tags'=>$tags,
+            'sectionId'=>isset($data['sectionId'])?isset($data['sectionId']):'',
+            'sectionName'=>isset($data['sectionName'])?isset($data['sectionName']):'',
+        ];
     }
 
     public function get($endPoint,$data,AccessToken $accessToken = null){

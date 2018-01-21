@@ -162,7 +162,7 @@ class Sortechs extends Request
                     'id' => $this->app->getId(),
                     'secret' => $this->app->getSecret(),
                     'accessToken' => $token->getValue(),
-                    'news' => json_encode($news->getData())
+                    'news' => $news->getData()
                 ],
                 $token
             )
@@ -179,7 +179,7 @@ class Sortechs extends Request
                     'id' => $this->app->getId(),
                     'secret' => $this->app->getSecret(),
                     'accessToken' => $token->getValue(),
-                    'news' => json_encode($news->getData())
+                    'news' => ($news->getData())
                 ],
                 $token
             )
@@ -201,8 +201,8 @@ class Sortechs extends Request
                     'id' => $this->app->getId(),
                     'secret' => $this->app->getSecret(),
                     'accessToken' => $token->getValue(),
-                    'news' => json_encode($news->getData()),
-                    'media' => json_encode($data_media)
+                    'news' => ($news->getData()),
+                    'media' => ($data_media)
                 ],
                 $token
             )
@@ -210,10 +210,13 @@ class Sortechs extends Request
         return new  ResponseNewsMedia($obj);
     }
 
-    public function AddTags(AccessToken $token, $tags)
+    public function AddTags(AccessToken $token, $data)
     {
         $data_tags = [];
         /**@var $tag Tags */
+        $tags = $data['tags'];
+        $sectionName = $data['sectionName'];
+        $sectionId = $data['sectionId'];
         foreach ($tags as $tag) {
             $data_tags[] = $tag->getData();
         }
@@ -224,7 +227,9 @@ class Sortechs extends Request
                     'id' => $this->app->getId(),
                     'secret' => $this->app->getSecret(),
                     'accessToken' => $token->getValue(),
-                    'tags' => json_encode($data_tags)
+                    'tags' => $data_tags,
+                    'sectionName' => $sectionName,
+                    'sectionId' => $sectionId,
                 ],
                 $token
             )
@@ -246,8 +251,8 @@ class Sortechs extends Request
                     'id' => $this->app->getId(),
                     'secret' => $this->app->getSecret(),
                     'accessToken' => $token->getValue(),
-                    'news' => json_encode($news->getData()),
-                    'media' => json_encode($data_media)
+                    'news' => $news->getData(),
+                    'media' => $data_media
                 ],
                 $token
             )

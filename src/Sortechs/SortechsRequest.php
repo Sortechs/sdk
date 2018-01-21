@@ -49,7 +49,7 @@ class SortechsRequest
      */
     protected $files = [];
 
-    private $url = 'https://social.sortechs.com/api';
+    private $url = 'https://local.sortechs.com/v1/api';
 
     const DEFAULT_REQUEST_TIMEOUT = 60;
 
@@ -65,7 +65,7 @@ class SortechsRequest
 
     public function __construct($endpoint,$method='GET',$params,AccessToken $accessToken = null){
         if(SORTECHS_STATUS){
-            $this->url = 'https://social.sortechs.com/api';
+            $this->url = 'https://social.sortechs.com/v1/api';
         }
         $this->endpoint= $this->url.$endpoint.'?';
 
@@ -83,7 +83,9 @@ class SortechsRequest
             throw new SortechsExceptions('token key not found in url');
         $url = $this->endpoint;
         $service_url = $url.key($token).'='.$token[key($token)];
-        $curl_post_data = array(key($token) => $token[key($token)],'params'=>$this->params);
+        $curl_post_data =[];
+        $curl_post_data[key($token) ]= $token[key($token)];
+        $curl_post_data = array_merge($curl_post_data,$this->params);
         $authorization = "Authorization: ".Sortechs::Authorization;
         $token = 'token: '.Sortechs::token;
         $header_data = [
@@ -105,9 +107,9 @@ class SortechsRequest
         curl_setopt($curl, CURLOPT_USERAGENT,$this->getUserAgent());
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($curl, CURLOPT_TIMEOUT, $timeout);
-        curl_setopt($curl,CURLOPT_POST, count($curl_post_data));
-        curl_setopt($curl,CURLOPT_POSTFIELDS, $curl_post_data);
-
+        curl_setopt($curl, CURLOPT_POST,true);
+        $url_data = http_build_query($curl_post_data);
+        curl_setopt($curl,CURLOPT_POSTFIELDS, $url_data);
         $curl_response = curl_exec($curl);
         if ($curl_response === false) {
             $info = curl_getinfo($curl);
@@ -137,7 +139,7 @@ class SortechsRequest
 
     private function PreparationParams($param){
 
-        $this->params = json_encode($param);
+        $this->params =$param;
     }
 
     private function getUserAgent(){

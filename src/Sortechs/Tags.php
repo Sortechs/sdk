@@ -75,10 +75,6 @@ class Tags{
 
 
     public function getData(){
-        return [
-            'text'=>$this->getText(),
-            'sectionId'=>$this->getSectionId(),
-            'sectionName'=>$this->getSectionName()
-        ];
+        return $this->getText() ;
     }
 }
