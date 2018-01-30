@@ -10,7 +10,7 @@ use Sortechs\Exceptions\SortechsExceptions;
 
 class UpdateNews{
 
-    private $id='';
+    private $newsId='';
 
     private $sectionId='';
 
@@ -118,17 +118,17 @@ class UpdateNews{
     /**
      * @param string $id
      */
-    public function setId($id)
+    public function setNewsId($id)
     {
-        $this->id = $id;
+        $this->newsId = $id;
     }
 
     /**
      * @return string
      */
-    public function getId()
+    public function getNewsId()
     {
-        return $this->id;
+        return $this->newsId;
     }
 
     /**
@@ -152,13 +152,14 @@ class UpdateNews{
     public function getData(){
         return[
 
-            'id'   => $this->getId(),
+            'news_id'   => $this->getNewsId(),
             'clientId'   => $this->getClientId(),
             'sectionId'   => $this->getSectionId(),
             'title'       => $this->getTitle(),
             'article'     => $this->getArticle(),
             'url'         => $this->getUrl(),
-            'options'     => $this->getOptions()
+            'options'     => $this->getOptions(),
+            'sectionName'=>''
         ];
     }
 
