@@ -155,17 +155,8 @@ class SortechsApp{
                 }
                 try{
                     $media->valid();
+                    $media_array[]=$media;
 
-                    if($media->getType()=='video'){
-                        if($media->getLength()<50000000){
-                            $media_array[]=$media;
-                        }else{
-                            echo 'Please select video less than  50mb.'.PHP_EOL;
-                        }
-
-                    }else{
-                        $media_array[]=$media;
-                    }
                 }catch (SortechsExceptions $e){
                     echo $e->getMessage();
                     exit();
