@@ -202,8 +202,8 @@ class SortechsApp{
 
         return [
             'tags'=>$tags,
-            'sectionId'=>isset($data['sectionId'])?isset($data['sectionId']):'',
-            'sectionName'=>isset($data['sectionName'])?isset($data['sectionName']):'',
+            'sectionId'=>isset($data['sectionId'])?$data['sectionId']:'',
+            'sectionName'=>isset($data['sectionName'])?$data['sectionName']:'',
         ];
     }
 
