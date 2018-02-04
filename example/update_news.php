@@ -20,7 +20,7 @@ $news = $so->getNews($news_id,$section_id,$token);
 
 if(!empty($news->getId())){
     $update = $so->app->updateNews([
-        'id'=>$news->getNewsId(),
+        'newsId'=>$news->getNewsId(),
         'sectionId'=>$news->getSectionId(),
         'clientId'=>$news->getClientId(),
         'title'=>'XXXX XXXX ',//*Required
