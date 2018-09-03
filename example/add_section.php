@@ -16,7 +16,7 @@ $so = new \Sortechs\Sortechs($data);
 $token = new Sortechs\Authentication\AccessToken($so->generateAccessToken());
 $data_section = new \Sortechs\request\Section(['title'=>'XXXX']);
 $data = $so->addSection($token,$data_section);
-print_r($data->getSection());
+
 print_r($data->getSections());
 
 
@@ -31,5 +31,5 @@ $data = [
 ];
 $so = new \Sortechs\Sortechs($data);
 $data = $so->addSection($so->accessToken,$data_section);
-print_r($data->getSection());
+
 print_r($data->getSections());

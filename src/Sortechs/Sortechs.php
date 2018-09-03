@@ -1,15 +1,13 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: msalahat
- * Date: 16/08/17
- * Time: 02:41 م
+ * User: mohammad
+ * Date: 7/19/18
+ * Time: 1:42 PM
  */
 namespace Sortechs;
-
 use Sortechs\Authentication\AccessToken;
 use Sortechs\Exceptions\SortechsExceptions;
-use Sortechs\Helpers\FileSortechs;
 use Sortechs\request\Request;
 use Sortechs\request\Section;
 use Sortechs\response\Response;
@@ -21,12 +19,9 @@ use Sortechs\response\ResponseNews;
 use Sortechs\response\ResponseNewsMedia;
 use Sortechs\response\ResponseSections;
 use Sortechs\response\ResponseTags;
-
 define('SORTECHS_STATUS', 0);
 
-class Sortechs extends Request
-{
-
+class Sortechs extends Request{
     const VERSION = '0.0.1';
 
     const APP_ID_ENV_NAME = 'SORTECHS_APP_ID';
@@ -40,6 +35,8 @@ class Sortechs extends Request
     public $app;
 
     public $accessToken;
+
+
 
     /**
      * @param $config array
@@ -83,18 +80,48 @@ class Sortechs extends Request
         return new SortechsApp($config['app_id'], $config['app_secret']);
     }
 
-    public function generateAccessToken()
-    {
-        $obj = new Response(
-            $this->app->post(
-                '/generateAccessToken',
-                [
-                    'id' => $this->app->getId(),
-                    'secret' => $this->app->getSecret()
-                ]
-            )
+    /* public function generateAccessToken()
+     {
+         $obj = new Response(
+             $this->app->post(
+                 '/generateAccessToken',
+                 [
+                     'id' => $this->app->getId(),
+                     'secret' => $this->app->getSecret()
+                 ]
+             )
+         );
+         $this->accessToken = new  ResponseGenerateAccessToken($obj);
+         return $this->accessToken;
+     }*/
+
+
+    public function generateAccessToken(){
+        $s = $this->app->post(
+            '/generateAccessToken',
+            [
+                'id' => $this->app->getId(),
+                'secret' => $this->app->getSecret()
+            ]
         );
-        $this->accessToken = new  ResponseGenerateAccessToken($obj);
+
+        if($s instanceof \stdClass){
+
+            if(isset($s->statusCode) and $s->statusCode==200){
+                if(isset($s->response)){
+                    if($s->response instanceof \stdClass){
+
+                        $this->accessToken = new  ResponseGenerateAccessToken($s->response);
+                    }
+                }
+            }else{
+                echo $s->textCode;
+            }
+
+        }else{
+
+        }
+
         return $this->accessToken;
     }
 
@@ -118,22 +145,23 @@ class Sortechs extends Request
 
     public function addSection(AccessToken $token, Section $data)
     {
-        $obj = new Response(
-            $this->app->post(
-                '/AddSection',
-                array_merge(
-                    [
-                        'id' => $this->app->getId(),
-                        'secret' => $this->app->getSecret(),
-                        'accessToken' => $token->getValue()
-                    ],
-                    $data->getData()
-                ),
-                $token
-            )
+
+
+        $action =  $this->app->post(
+            '/AddSection',
+            array_merge(
+                [
+                    'id' => $this->app->getId(),
+                    'secret' => $this->app->getSecret(),
+                    'accessToken' => $token->getValue()
+                ],
+                $data->getData()
+            ),
+            $token
         );
-        $Section = new  ResponseAddSections($obj);
-        return $Section;
+        $obj = new Response($action);
+        return new  ResponseSections($obj);
+
     }
 
     public function getClients(AccessToken $token)
@@ -171,7 +199,7 @@ class Sortechs extends Request
     }
 
     public function SendNews(AccessToken $token, UpdateNews $news){
-        
+
         $obj = new Response(
             $this->app->post(
                 '/updateNews',

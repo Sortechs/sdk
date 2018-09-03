@@ -16,11 +16,17 @@ class  ResponseGenerateAccessToken extends ResponseCustomer{
 
     private $expiry;
 
-    public function __construct(Response $response){
-        
-        $this->setResponse($response->getResponse());
-        $this->setStatusCode($response->getStatusCode());
-        $this->Preparation($response);
+    public function __construct($response){
+
+        if(isset($response->accessToken)){
+            $this->setAccessToken($response->accessToken);
+        }
+
+        if(isset($response->expiry)){
+            $this->setExpiry($response->expiry);
+        }
+
+        $this->setResponse($response);
     }
 
     /**

@@ -14,6 +14,8 @@ $data = [
 /**@var $so \Sortechs\Sortechs **/
 $so = new \Sortechs\Sortechs($data);
 $token = new Sortechs\Authentication\AccessToken($so->generateAccessToken());
+$section = $so->getSections($token);
+
 /** video */
 /*$media = $so->app->media([
     [
